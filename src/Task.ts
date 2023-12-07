@@ -1,5 +1,5 @@
 export interface Task {
   title: string;
   description?: string;
-  status: "DONE" | "RUNNING" | "CANCELED";
+  status: "PENDING" | "RUNNING" | "BLOCKED" | "COMPLETED";
 }
