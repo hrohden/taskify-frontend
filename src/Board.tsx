@@ -16,7 +16,7 @@ const Board = () => {
     },
   ]);
   return (
-    <div className="flex w-full justify-between gap-2">
+    <div className="flex w-full justify-between gap-3">
       <BoardColumn title="Pending" tasks={tasks} />
       <BoardColumn title="Running" tasks={tasks} />
       <BoardColumn title="Blocked" tasks={tasks} />
