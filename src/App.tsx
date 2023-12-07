@@ -1,6 +1,6 @@
 import { useState } from "react";
+import Board from "./Board";
 import { Task } from "./Task";
-import TaskCard from "./TaskCard";
 
 function App() {
   const [tasks] = useState<Task[]>([
@@ -17,11 +17,9 @@ function App() {
   ]);
 
   return (
-    <div className="flex justify-center">
-      <h1 className="font-bold text-4xl">Taskify</h1>
-      {tasks.map((t) => (
-        <TaskCard task={t} />
-      ))}
+    <div className="flex w-full flex-col items-center gap-8 p-12">
+      <h1 className="text-6xl font-bold">Taskify</h1>
+      <Board tasks={tasks} />
     </div>
   );
 }
