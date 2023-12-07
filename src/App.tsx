@@ -5,12 +5,12 @@ import { Task } from "./Task";
 function App() {
   const [tasks] = useState<Task[]>([
     {
-      status: "PENDING",
+      status: "RUNNING",
       title: "Create Taskify application",
       description: "Initial code to showcase some features.",
     },
     {
-      status: "PENDING",
+      status: "RUNNING",
       title: "Create GitHub repository",
       description: "Create repo and push code to it",
     },
