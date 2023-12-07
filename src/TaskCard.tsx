@@ -1,8 +1,16 @@
 import { Task } from "./Task";
 
 const TaskStatus = ({ status }: { status: string }) => {
+  const styles = {
+    PENDING: { text: "text-slate-700", background: "bg-slate-200" },
+    RUNNING: { text: "text-green-700", background: "bg-green-200" },
+    BLOCKED: { text: "text-red-700", background: "bg-red-200" },
+    COMPLETED: { text: "text-purple-700", background: "bg-purple-200" },
+  };
   return (
-    <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-700">
+    <span
+      className={`rounded-full ${styles[status].background} px-3 py-1 text-xs font-semibold ${styles[status].text}`}
+    >
       {status}
     </span>
   );
