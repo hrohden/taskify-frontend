@@ -8,7 +8,7 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
       {tasks.length > 0 ? (
         <div className="flex w-full flex-col justify-stretch gap-3">
           {tasks.map((t) => (
-            <TaskCard task={t} />
+            <TaskCard task={t} key={t.id} />
           ))}
         </div>
       ) : (
