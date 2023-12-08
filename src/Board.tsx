@@ -5,11 +5,13 @@ import { Task } from "./Task";
 const Board = () => {
   const [tasks] = useState<Task[]>([
     {
+      id: "1",
       status: "RUNNING",
       title: "Create Taskify application",
       description: "Initial code to showcase some features.",
     },
     {
+      id: "2",
       status: "RUNNING",
       title: "Create GitHub repository",
       description: "Create repo and push code to it",
