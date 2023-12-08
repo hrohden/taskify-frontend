@@ -1,22 +1,9 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import BoardColumn from "./BoardColumn";
-import { Task } from "./Task";
+import { Store } from "./types/store";
 
 const Board = () => {
-  const [tasks] = useState<Task[]>([
-    {
-      id: "1",
-      status: "RUNNING",
-      title: "Create Taskify application",
-      description: "Initial code to showcase some features.",
-    },
-    {
-      id: "2",
-      status: "RUNNING",
-      title: "Create GitHub repository",
-      description: "Create repo and push code to it",
-    },
-  ]);
+  const tasks = useSelector((state: Store) => state.tasks);
   return (
     <div className="flex w-full justify-between gap-3">
       <BoardColumn title="Pending" tasks={[]} />
