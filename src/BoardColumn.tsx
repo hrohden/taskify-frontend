@@ -1,5 +1,5 @@
-import { Task } from "./Task";
 import TaskCard from "./TaskCard";
+import { Task } from "./types/Task";
 
 const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
   return (

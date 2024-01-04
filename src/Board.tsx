@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import BoardColumn from "./BoardColumn";
-import { Store } from "./types/store";
+import { Store } from "./types/Store";
 
 const Board = () => {
   const tasks = useSelector((state: Store) => state.tasks);

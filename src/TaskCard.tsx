@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { Task } from "./Task";
 import TaskStatus from "./TaskStatus";
 import { move } from "./app/taskSlice";
+import { Task } from "./types/Task";
 
 const TaskCard = ({ task }: { task: Task }) => {
   const dispatch = useDispatch();
