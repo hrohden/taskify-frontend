@@ -1,3 +1,4 @@
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import TaskStatus from "./TaskStatus";
 import { move } from "./app/taskSlice";
@@ -24,7 +25,7 @@ const TaskCard = ({ task }: { task: Task }) => {
               );
             }}
           >
-            ◀
+            <FaAngleLeft />
           </button>
         )}
         {task.status.id < maxStatusId && (
@@ -43,7 +44,7 @@ const TaskCard = ({ task }: { task: Task }) => {
               );
             }}
           >
-            ▶
+            <FaAngleRight />
           </button>
         )}
       </div>

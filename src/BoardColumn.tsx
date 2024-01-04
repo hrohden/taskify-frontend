@@ -1,3 +1,4 @@
+import { FaPlus } from "react-icons/fa";
 import TaskCard from "./TaskCard";
 import { Task } from "./types/Task";
 
@@ -6,8 +7,8 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
     <div className="flex w-full flex-col gap-3">
       <div className="flex w-full justify-center font-semibold">{title}</div>
       <div className="">
-        <button className="block w-full rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold">
-          + Add
+        <button className="flex w-full items-center justify-center gap-1 rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold">
+          <FaPlus /> Add
         </button>
       </div>
       {tasks.length > 0 ? (
