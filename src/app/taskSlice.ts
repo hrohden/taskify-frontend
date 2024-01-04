@@ -23,8 +23,15 @@ export const taskSlice = createSlice({
     create: (state, action: PayloadAction<Task>) => {
       state.concat(action.payload);
     },
+    move: (state, action: PayloadAction<{ id: string; status: string }>) => {
+      const { id, status } = action.payload;
+      const task = state.find((task) => task.id === id);
+      if (task) {
+        task.status = status;
+      }
+    },
   },
 });
 
-export const { create } = taskSlice.actions;
+export const { create, move } = taskSlice.actions;
 export default taskSlice.reducer;

@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux";
 import { Task } from "./Task";
 import TaskStatus from "./TaskStatus";
+import { move } from "./app/taskSlice";
 
 const TaskCard = ({ task }: { task: Task }) => {
+  const dispatch = useDispatch();
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-300 shadow">
       <div className="flex w-full justify-stretch gap-1 rounded-t-md p-2 font-semibold">
@@ -9,12 +12,17 @@ const TaskCard = ({ task }: { task: Task }) => {
         <button
           className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
           onClick={() => {
-            console.log("Clicked");
+            dispatch(move({ id: task.id, status: "PENDING" }));
           }}
         >
           ◀
         </button>
-        <button className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400">
+        <button
+          className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
+          onClick={() => {
+            dispatch(move({ id: task.id, status: "BLOCKED" }));
+          }}
+        >
           ▶
         </button>
       </div>
