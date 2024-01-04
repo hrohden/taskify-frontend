@@ -5,6 +5,11 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
   return (
     <div className="flex w-full flex-col gap-3">
       <div className="flex w-full justify-center font-semibold">{title}</div>
+      <div className="">
+        <button className="block w-full rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold">
+          + Add
+        </button>
+      </div>
       {tasks.length > 0 ? (
         <div className="flex w-full flex-col justify-stretch gap-3">
           {tasks.map((t) => (
