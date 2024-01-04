@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import TaskStatus from "./TaskStatus";
 import { move } from "./app/taskSlice";
+import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
 const TaskCard = ({ task }: { task: Task }) => {
@@ -12,7 +13,12 @@ const TaskCard = ({ task }: { task: Task }) => {
         <button
           className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
           onClick={() => {
-            dispatch(move({ id: task.id, status: "PENDING" }));
+            dispatch(
+              move({
+                id: task.id,
+                status: statusList.find((s) => s.id === task.status.id - 1)!,
+              }),
+            );
           }}
         >
           ◀
@@ -20,7 +26,12 @@ const TaskCard = ({ task }: { task: Task }) => {
         <button
           className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
           onClick={() => {
-            dispatch(move({ id: task.id, status: "BLOCKED" }));
+            dispatch(
+              move({
+                id: task.id,
+                status: statusList.find((s) => s.id === task.status.id + 1)!,
+              }),
+            );
           }}
         >
           ▶
