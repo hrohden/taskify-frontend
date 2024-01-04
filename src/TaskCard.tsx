@@ -14,7 +14,7 @@ const TaskCard = ({ task }: { task: Task }) => {
         <div className="w-full text-center">{task.title}</div>
         {task.status.id > minStatusId && (
           <button
-            className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
+            className="w-8 rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold"
             onClick={() => {
               dispatch(
                 move({
@@ -29,7 +29,7 @@ const TaskCard = ({ task }: { task: Task }) => {
         )}
         {task.status.id < maxStatusId && (
           <button
-            className="w-8 rounded-md border border-gray-200 p-1 text-sm text-gray-400"
+            className="w-8 rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold"
             onClick={() => {
               const newStatusId =
                 task.status.id + 1 > maxStatusId
