@@ -10,50 +10,56 @@ const TaskCard = ({ task }: { task: Task }) => {
   const minStatusId = statusList[0].id;
   const maxStatusId = statusList[statusList.length - 1].id;
   return (
-    <div className="flex w-full flex-col rounded-md border border-gray-300 shadow">
-      <div className="flex w-full justify-stretch gap-1 rounded-t-md p-2 font-semibold">
-        <div className="w-full text-center">{task.title}</div>
-        <div className="inline-flex rounded-full border border-gray-200 p-0.5 dark:border-gray-700">
-          {task.status.id > minStatusId && (
-            <button
-              className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-1 dark:focus:ring-gray-600 dark:focus:ring-gray-600"
-              onClick={() => {
-                dispatch(
-                  move({
-                    id: task.id,
-                    status: statusList.find(
-                      (s) => s.id === task.status.id - 1,
-                    )!,
-                  }),
-                );
-              }}
-            >
-              <FaAngleLeft />
-            </button>
-          )}
-          {task.status.id < maxStatusId && (
-            <button
-              className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-1 dark:focus:ring-gray-600 dark:focus:ring-gray-600"
-              onClick={() => {
-                const newStatusId =
-                  task.status.id + 1 > maxStatusId
-                    ? maxStatusId
-                    : task.status.id + 1;
-                dispatch(
-                  move({
-                    id: task.id,
-                    status: statusList.find((s) => s.id === newStatusId)!,
-                  }),
-                );
-              }}
-            >
-              <FaAngleRight />
-            </button>
-          )}
+    <div className="flex flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
+      <div className="p-4 md:p-5">
+        <div className="flex justify-between">
+          <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+            {task.title}
+          </h3>
+          <div className="inline-flex rounded-full border border-gray-200 p-0.5 dark:border-gray-700">
+            {task.status.id > minStatusId && (
+              <button
+                className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-1 dark:focus:ring-gray-600 dark:focus:ring-gray-600"
+                onClick={() => {
+                  dispatch(
+                    move({
+                      id: task.id,
+                      status: statusList.find(
+                        (s) => s.id === task.status.id - 1,
+                      )!,
+                    }),
+                  );
+                }}
+              >
+                <FaAngleLeft />
+              </button>
+            )}
+            {task.status.id < maxStatusId && (
+              <button
+                className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-1 dark:focus:ring-gray-600 dark:focus:ring-gray-600"
+                onClick={() => {
+                  const newStatusId =
+                    task.status.id + 1 > maxStatusId
+                      ? maxStatusId
+                      : task.status.id + 1;
+                  dispatch(
+                    move({
+                      id: task.id,
+                      status: statusList.find((s) => s.id === newStatusId)!,
+                    }),
+                  );
+                }}
+              >
+                <FaAngleRight />
+              </button>
+            )}
+          </div>
         </div>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          {task.description}
+        </p>
       </div>
-      <div className="w-full p-2 text-sm">{task.description}</div>
-      <div className="flex w-full justify-end rounded-b-md border-t border-t-gray-200 bg-gray-50 p-2">
+      <div className="rounded-b-xl border-t bg-gray-100 px-4 py-3 dark:border-gray-700 dark:bg-slate-900 md:px-5 md:py-4">
         <TaskStatus status={task.status} />
       </div>
     </div>

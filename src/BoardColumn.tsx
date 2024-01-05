@@ -7,7 +7,7 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
     <div className="flex w-full flex-col gap-3">
       <div className="flex w-full justify-center font-semibold">{title}</div>
       <div className="">
-        <button className="flex w-full items-center justify-center gap-1 rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm font-semibold">
+        <button className="flex w-full items-center justify-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
           <FaPlus /> Add
         </button>
       </div>
