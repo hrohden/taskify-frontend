@@ -16,6 +16,12 @@ export const tasksApi = createApi({
         method: "GET",
       }),
     }),
+    getAllStatus: builder.query<Status[], void>({
+      query: () => ({
+        url: "/status",
+        method: "GET",
+      }),
+    }),
     updateTaskStatus: builder.mutation<Task, UpdateTaskStatus>({
       query: ({ id, statusId }) => ({
         url: `/tasks/${id}`,
@@ -44,5 +50,9 @@ export const taskSlice = createSlice({
 });
 
 export const { create, move } = taskSlice.actions;
-export const { useGetAllTasksQuery, useUpdateTaskStatusMutation } = tasksApi;
+export const {
+  useGetAllTasksQuery,
+  useUpdateTaskStatusMutation,
+  useGetAllStatusQuery,
+} = tasksApi;
 export default taskSlice.reducer;

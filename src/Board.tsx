@@ -1,28 +1,18 @@
 import BoardColumn from "./BoardColumn";
-import { useGetAllTasksQuery } from "./app/taskSlice";
-import { statusList } from "./types/Status";
+import { useGetAllStatusQuery } from "./app/taskSlice";
 
 const Board = () => {
-  // const tasks = useSelector((state: Store) => state.tasks);
-  const { data, error, isLoading } = useGetAllTasksQuery();
-  return (
+  const status = useGetAllStatusQuery();
+  return status.error ? (
+    <>Oh no, there was an error</>
+  ) : status.isLoading ? (
+    <>Loading...</>
+  ) : status.data ? (
     <div className="flex w-full justify-between gap-3">
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
-        <div>
-          {statusList.map((status) => (
-            <BoardColumn
-              key={status.id}
-              title={status.description}
-              tasks={data.filter((task) => task.status.id === status.id)}
-            />
-          ))}
-        </div>
-      ) : null}
+      {status.data.map((status) => (
+        <BoardColumn key={status.id} title={status.description} tasks={[]} />
+      ))}
     </div>
-  );
+  ) : null;
 };
 export default Board;
