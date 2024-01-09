@@ -1,8 +1,9 @@
 import BoardColumn from "./BoardColumn";
-import { useGetAllStatusQuery } from "./app/taskSlice";
+import { useGetAllStatusQuery, useGetAllTasksQuery } from "./app/taskSlice";
 
 const Board = () => {
   const status = useGetAllStatusQuery();
+  const tasks = useGetAllTasksQuery();
   return status.error ? (
     <>Oh no, there was an error</>
   ) : status.isLoading ? (
@@ -10,7 +11,13 @@ const Board = () => {
   ) : status.data ? (
     <div className="flex w-full justify-between gap-3">
       {status.data.map((status) => (
-        <BoardColumn key={status.id} title={status.description} tasks={[]} />
+        <BoardColumn
+          key={status.id}
+          title={status.description}
+          tasks={
+            tasks.data?.filter((task) => task.status.id === status.id) || []
+          }
+        />
       ))}
     </div>
   ) : null;
