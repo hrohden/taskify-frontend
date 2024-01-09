@@ -9,12 +9,14 @@ const initialState: Task[] = [];
 export const tasksApi = createApi({
   reducerPath: "tasksApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  tagTypes: ["Task"],
   endpoints: (builder) => ({
     getAllTasks: builder.query<Task[], void>({
       query: () => ({
         url: "/tasks",
         method: "GET",
       }),
+      providesTags: ["Task"],
     }),
     getAllStatus: builder.query<Status[], void>({
       query: () => ({
@@ -28,6 +30,7 @@ export const tasksApi = createApi({
         method: "POST",
         body: { id, statusId },
       }),
+      invalidatesTags: ["Task"],
     }),
   }),
 });
