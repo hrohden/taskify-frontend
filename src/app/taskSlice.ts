@@ -16,7 +16,10 @@ export const tasksApi = createApi({
         url: "/tasks",
         method: "GET",
       }),
-      providesTags: ["Task"],
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: "Task" as const, id })), "Task"]
+          : ["Task"],
     }),
     getAllStatus: builder.query<Status[], void>({
       query: () => ({
@@ -30,7 +33,7 @@ export const tasksApi = createApi({
         method: "POST",
         body: { id, statusId },
       }),
-      invalidatesTags: ["Task"],
+      invalidatesTags: (_result, _error, arg) => [{ type: "Task", id: arg.id }],
     }),
   }),
 });
