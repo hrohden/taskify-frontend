@@ -1,12 +1,11 @@
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import TaskStatus from "./TaskStatus";
-import { move } from "./app/taskSlice";
+import { useUpdateTaskStatusMutation } from "./app/taskSlice";
 import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
 const TaskCard = ({ task }: { task: Task }) => {
-  const dispatch = useDispatch();
+  const [updateTaskStatus] = useUpdateTaskStatusMutation();
   const minStatusId = statusList[0].id;
   const maxStatusId = statusList[statusList.length - 1].id;
   return (
@@ -21,14 +20,10 @@ const TaskCard = ({ task }: { task: Task }) => {
               <button
                 className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 onClick={() => {
-                  dispatch(
-                    move({
-                      id: task.id,
-                      status: statusList.find(
-                        (s) => s.id === task.status.id - 1,
-                      )!,
-                    }),
-                  );
+                  updateTaskStatus({
+                    id: task.id,
+                    statusId: task.status.id - 1,
+                  });
                 }}
               >
                 <FaAngleLeft />
@@ -38,16 +33,10 @@ const TaskCard = ({ task }: { task: Task }) => {
               <button
                 className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-blue-900 dark:hover:text-blue-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 onClick={() => {
-                  const newStatusId =
-                    task.status.id + 1 > maxStatusId
-                      ? maxStatusId
-                      : task.status.id + 1;
-                  dispatch(
-                    move({
-                      id: task.id,
-                      status: statusList.find((s) => s.id === newStatusId)!,
-                    }),
-                  );
+                  updateTaskStatus({
+                    id: task.id,
+                    statusId: task.status.id + 1,
+                  });
                 }}
               >
                 <FaAngleRight />
