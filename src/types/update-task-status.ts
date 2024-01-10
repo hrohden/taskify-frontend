@@ -1,4 +1,4 @@
 export interface UpdateTaskStatus {
-  id: string;
+  id: number;
   statusId: number;
 }
