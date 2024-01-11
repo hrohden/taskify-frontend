@@ -5,10 +5,10 @@ import { Task } from "./types/Task";
 const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
   return (
     <div className="flex w-full flex-col gap-3">
-      <div className="flex w-full justify-center font-semibold">{title}</div>
-      <div className="">
-        <button className="flex w-full items-center justify-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-          <FaPlus /> Add
+      <div className="flex w-full items-center justify-center gap-3 font-semibold">
+        {title}
+        <button className="flex items-center justify-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          <FaPlus />
         </button>
       </div>
       {tasks.length > 0 ? (
