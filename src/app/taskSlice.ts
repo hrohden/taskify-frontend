@@ -35,6 +35,13 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: (_result, _error, arg) => [{ type: "Task", id: arg.id }],
     }),
+    deleteTask: builder.mutation<Task, number>({
+      query: (id) => ({
+        url: `/tasks/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (_result) => [{ type: "Task", id: _result!.id }],
+    }),
   }),
 });
 
@@ -60,5 +67,6 @@ export const {
   useGetAllTasksQuery,
   useUpdateTaskStatusMutation,
   useGetAllStatusQuery,
+  useDeleteTaskMutation,
 } = tasksApi;
 export default taskSlice.reducer;

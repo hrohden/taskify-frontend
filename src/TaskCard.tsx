@@ -1,11 +1,15 @@
 import { FaAngleLeft, FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import TaskStatus from "./TaskStatus";
-import { useUpdateTaskStatusMutation } from "./app/taskSlice";
+import {
+  useDeleteTaskMutation,
+  useUpdateTaskStatusMutation,
+} from "./app/taskSlice";
 import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
 const TaskCard = ({ task }: { task: Task }) => {
   const [updateTaskStatus] = useUpdateTaskStatusMutation();
+  const [deleteTaskMutation] = useDeleteTaskMutation();
   const minStatusId = statusList[0].id;
   const maxStatusId = statusList[statusList.length - 1].id;
   return (
@@ -24,7 +28,7 @@ const TaskCard = ({ task }: { task: Task }) => {
         <button
           className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={() => {
-            console.log("Removed!");
+            deleteTaskMutation(task.id);
           }}
         >
           <FaRegTrashAlt />
