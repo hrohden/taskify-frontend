@@ -30,7 +30,7 @@ export const tasksApi = createApi({
     updateTaskStatus: builder.mutation<Task, UpdateTaskStatus>({
       query: ({ id, statusId }) => ({
         url: `/tasks/${id}`,
-        method: "POST",
+        method: "PATCH",
         body: { id, statusId },
       }),
       invalidatesTags: (_result, _error, arg) => [{ type: "Task", id: arg.id }],
@@ -45,7 +45,7 @@ export const taskSlice = createSlice({
     create: (state, action: PayloadAction<Task>) => {
       state.concat(action.payload);
     },
-    move: (state, action: PayloadAction<{ id: string; status: Status }>) => {
+    move: (state, action: PayloadAction<{ id: number; status: Status }>) => {
       const { id, status } = action.payload;
       const task = state.find((task) => task.id === id);
       if (task) {
