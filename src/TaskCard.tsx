@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import {
   FaAngleLeft,
   FaAngleRight,
+  FaCheck,
   FaRegEdit,
   FaRegTrashAlt,
 } from "react-icons/fa";
@@ -27,6 +28,7 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
     <div className="p-2">
       <form
         className="flex flex-col gap-2"
+        id={`task_${task.id}`}
         onSubmit={form.handleSubmit((data) => {
           updateTask({ id: task.id, ...data });
         })}
@@ -40,10 +42,6 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
           type="text"
           {...form.register("description")}
           className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
-        />
-        <input
-          type="submit"
-          className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         />
       </form>
     </div>
@@ -82,6 +80,15 @@ const TaskCard = ({ task }: { task: Task }) => {
         <div className="flex w-full items-center">
           <TaskStatus status={task.status} />
         </div>
+        {editMode && (
+          <button
+            className="flex items-center justify-center rounded-lg border border-transparent bg-blue-600 px-3 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            type="submit"
+            form={`task_${task.id}`}
+          >
+            <FaCheck />
+          </button>
+        )}
         <button
           className="dark:text-red inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={() => {
