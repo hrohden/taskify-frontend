@@ -5,7 +5,7 @@ const TaskStatus = ({ status }: { status: Status }) => {
     {
       id: 1,
       className:
-        "inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-white/10 dark:text-white",
+        "inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-200 text-gray-800 dark:bg-white/10 dark:text-white",
     },
     {
       id: 2,
