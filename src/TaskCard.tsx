@@ -24,16 +24,16 @@ const TaskCard = ({ task }: { task: Task }) => {
           {task.description}
         </p>
       </div>
-      <div className="flex justify-end gap-3 rounded-b-xl border-t bg-gray-100 px-3 py-3 dark:border-gray-700 dark:bg-slate-900 md:px-2 md:py-2">
+      <div className="flex justify-end gap-2 rounded-b-xl border-t bg-gray-100 px-3 py-3 dark:border-gray-700 dark:bg-slate-900 md:px-2 md:py-2">
+        <TaskStatus status={task.status} />
         <button
-          className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="dark:text-red inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-red-600 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={() => {
             deleteTaskMutation(task.id);
           }}
         >
           <FaRegTrashAlt />
         </button>
-        <TaskStatus status={task.status} />
         <div className="inline-flex rounded-lg border border-gray-200 bg-white p-0.5 dark:border-gray-700">
           {task.status.id > minStatusId && (
             <button
