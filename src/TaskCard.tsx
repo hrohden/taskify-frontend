@@ -1,4 +1,10 @@
-import { FaAngleLeft, FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
+import { useState } from "react";
+import {
+  FaAngleLeft,
+  FaAngleRight,
+  FaRegEdit,
+  FaRegTrashAlt,
+} from "react-icons/fa";
 import TaskStatus from "./TaskStatus";
 import {
   useDeleteTaskMutation,
@@ -7,25 +13,51 @@ import {
 import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
+const TaskCardEditForm = ({ task }: { task: Task }) => {
+  return <div>edit form...</div>;
+};
+
+const TaskCardContent = ({ task }: { task: Task }) => {
+  return (
+    <div className="p-4 md:p-5">
+      <div className="flex justify-between">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+          {task.title}
+        </h3>
+      </div>
+      <p className="mt-2 text-gray-500 dark:text-gray-400">
+        {task.description}
+      </p>
+    </div>
+  );
+};
+
 const TaskCard = ({ task }: { task: Task }) => {
   const [updateTaskStatus] = useUpdateTaskStatusMutation();
   const [deleteTaskMutation] = useDeleteTaskMutation();
+  const [editMode, setEditMode] = useState(false);
   const minStatusId = statusList[0].id;
   const maxStatusId = statusList[statusList.length - 1].id;
   return (
     <div className="flex flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
-      <div className="p-4 md:p-5">
-        <div className="flex justify-between">
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-            {task.title}
-          </h3>
-        </div>
-        <p className="mt-2 text-gray-500 dark:text-gray-400">
-          {task.description}
-        </p>
-      </div>
+      {editMode ? (
+        <TaskCardEditForm task={task} />
+      ) : (
+        <TaskCardContent task={task} />
+      )}
       <div className="flex justify-end gap-2 rounded-b-xl border-t bg-gray-100 px-3 py-3 dark:border-gray-700 dark:bg-slate-900 md:px-2 md:py-2">
-        <TaskStatus status={task.status} />
+        <div className="flex w-full items-center">
+          <TaskStatus status={task.status} />
+        </div>
+        <button
+          className="dark:text-red inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          onClick={() => {
+            setEditMode((prevEditMode) => !prevEditMode);
+            console.log("change");
+          }}
+        >
+          <FaRegEdit />
+        </button>
         <button
           className="dark:text-red inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-red-600 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={() => {
