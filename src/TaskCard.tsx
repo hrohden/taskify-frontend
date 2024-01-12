@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   FaAngleLeft,
   FaAngleRight,
@@ -8,18 +9,50 @@ import {
 import TaskStatus from "./TaskStatus";
 import {
   useDeleteTaskMutation,
+  useUpdateTaskMutation,
   useUpdateTaskStatusMutation,
 } from "./app/taskSlice";
 import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
 const TaskCardEditForm = ({ task }: { task: Task }) => {
-  return <div>edit form...</div>;
+  const form = useForm<Task>({
+    defaultValues: {
+      title: task.title,
+      description: task.description,
+    },
+  });
+  const [updateTask] = useUpdateTaskMutation();
+  return (
+    <div className="p-2">
+      <form
+        className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit((data) => {
+          updateTask({ id: task.id, ...data });
+        })}
+      >
+        <input
+          type="text"
+          {...form.register("title")}
+          className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+        />
+        <input
+          type="text"
+          {...form.register("description")}
+          className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+        />
+        <input
+          type="submit"
+          className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        />
+      </form>
+    </div>
+  );
 };
 
 const TaskCardContent = ({ task }: { task: Task }) => {
   return (
-    <div className="p-4 md:p-5">
+    <div className="p-4">
       <div className="flex justify-between">
         <h3 className="text-lg font-bold text-gray-800 dark:text-white">
           {task.title}
@@ -53,7 +86,6 @@ const TaskCard = ({ task }: { task: Task }) => {
           className="dark:text-red inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={() => {
             setEditMode((prevEditMode) => !prevEditMode);
-            console.log("change");
           }}
         >
           <FaRegEdit />
