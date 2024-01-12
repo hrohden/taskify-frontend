@@ -36,12 +36,12 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
         <input
           type="text"
           {...form.register("title")}
-          className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+          className="block w-full rounded-lg border border-gray-200 p-2 text-lg font-bold text-gray-800 dark:text-white"
         />
         <input
           type="text"
           {...form.register("description")}
-          className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+          className="block w-full rounded-lg border border-gray-200 p-2 text-gray-500 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
         />
       </form>
     </div>
@@ -50,13 +50,13 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
 
 const TaskCardContent = ({ task }: { task: Task }) => {
   return (
-    <div className="p-4">
+    <div className="p-2">
       <div className="flex justify-between">
-        <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+        <h3 className="border border-white p-2 text-lg font-bold text-gray-800 dark:text-white">
           {task.title}
         </h3>
       </div>
-      <p className="mt-2 text-gray-500 dark:text-gray-400">
+      <p className="mt-2 border border-white p-2 text-gray-500 dark:text-gray-400">
         {task.description}
       </p>
     </div>
