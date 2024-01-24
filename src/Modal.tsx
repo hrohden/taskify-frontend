@@ -17,7 +17,12 @@ const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
       className="fixed bottom-0 left-0 right-0 top-0 z-50 bg-black bg-opacity-50 backdrop-blur"
       onClick={onClose}
     >
-      <div className="relative left-2/4 top-2/4 w-1/3 -translate-x-2/4 -translate-y-2/4 rounded-xl bg-white shadow-lg">
+      <div
+        className="relative left-2/4 top-2/4 w-1/3 -translate-x-2/4 -translate-y-2/4 rounded-xl bg-white shadow-lg"
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+          e.stopPropagation();
+        }}
+      >
         <div className="flex items-center justify-between border-b px-4 py-3 dark:border-gray-700">
           <h3 className="font-bold text-gray-800 dark:text-gray-200">
             {title}
