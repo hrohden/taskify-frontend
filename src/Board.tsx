@@ -13,7 +13,7 @@ const Board = () => {
       {status.data.map((status) => (
         <BoardColumn
           key={status.id}
-          title={status.description}
+          status={status}
           tasks={
             tasks.data?.filter((task) => task.status.id === status.id) || []
           }

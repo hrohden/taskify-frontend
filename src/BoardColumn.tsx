@@ -2,15 +2,16 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import NewTaskModalForm from "./NewTaskModalForm";
 import TaskCard from "./TaskCard";
+import { Status } from "./types/Status";
 import { Task } from "./types/Task";
 
-const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
+const BoardColumn = ({ tasks, status }: { tasks: Task[]; status: Status }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <div className="flex w-full flex-col gap-3">
         <div className="flex w-full items-center justify-center gap-3 font-semibold">
-          {title}
+          {status.description}
           <button
             onClick={() => setIsModalOpen(true)}
             className="flex items-center justify-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -33,6 +34,7 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
       <NewTaskModalForm
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        status={status}
       />
     </>
   );
