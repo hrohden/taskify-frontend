@@ -1,4 +1,7 @@
+import { useForm } from "react-hook-form";
 import Modal from "./Modal";
+import { useCreateTaskMutation } from "./app/taskSlice";
+import { Task } from "./types/Task";
 
 type NewTaskModalFormProps = {
   isModalOpen: boolean;
@@ -6,13 +9,29 @@ type NewTaskModalFormProps = {
 };
 
 const NewTaskModalForm = (props: NewTaskModalFormProps) => {
+  const form = useForm<Task>({
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+  });
+  const [createTask] = useCreateTaskMutation();
   return (
     <Modal
       title="New task"
       isOpen={props.isModalOpen}
       onClose={() => props.setIsModalOpen(false)}
     >
-      <h1>Hello, World!</h1>
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log(data);
+          // createTask({ id: task.id, ...data });
+        })}
+      >
+        <input type="text" {...form.register("title")} />
+        <input type="text" {...form.register("description")} />
+        <button type="submit">Submit</button>
+      </form>
     </Modal>
   );
 };
