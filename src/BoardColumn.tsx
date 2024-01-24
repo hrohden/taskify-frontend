@@ -30,7 +30,11 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
           </div>
         )}
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        title="New task"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
         <h1>Hello, World!</h1>
       </Modal>
     </>
