@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import Modal from "./Modal";
+import NewTaskModalForm from "./NewTaskModalForm";
 import TaskCard from "./TaskCard";
 import { Task } from "./types/Task";
 
@@ -30,13 +30,10 @@ const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
           </div>
         )}
       </div>
-      <Modal
-        title="New task"
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      >
-        <h1>Hello, World!</h1>
-      </Modal>
+      <NewTaskModalForm
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   );
 };
