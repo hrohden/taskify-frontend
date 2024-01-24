@@ -36,9 +36,6 @@ const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
           </button>
         </div>
         <div className="p-4">{children}</div>
-        <div className="p-4">
-          <button onClick={onClose}>Close</button>
-        </div>
       </div>
     </div>
   );
