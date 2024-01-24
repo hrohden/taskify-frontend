@@ -7,6 +7,7 @@ import {
   FaRegEdit,
   FaRegTrashAlt,
 } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import TaskStatus from "./TaskStatus";
 import {
   useDeleteTaskMutation,
@@ -16,7 +17,13 @@ import {
 import { statusList } from "./types/Status";
 import { Task } from "./types/Task";
 
-const TaskCardEditForm = ({ task }: { task: Task }) => {
+const TaskCardEditForm = ({
+  task,
+  handleClick,
+}: {
+  task: Task;
+  handleClick: () => void;
+}) => {
   const form = useForm<Task>({
     defaultValues: {
       title: task.title,
@@ -32,6 +39,7 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
         onSubmit={form.handleSubmit((data) => {
           // @ts-expect-error id is required
           updateTask({ id: task.id, ...data });
+          handleClick();
         })}
       >
         <input
@@ -44,13 +52,20 @@ const TaskCardEditForm = ({ task }: { task: Task }) => {
           {...form.register("description")}
           className="block w-full rounded-lg border border-gray-200 p-2 text-gray-500 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
         />
-        <button
-          className="flex items-center justify-center gap-2 rounded-lg border border-transparent bg-blue-600 px-2 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          type="submit"
-          form={`task_${task.id}`}
-        >
-          <FaCheck /> Save changes
-        </button>
+        <div className="flex gap-2">
+          <button
+            className="flex w-full items-center justify-center gap-2 rounded-lg border border-transparent bg-blue-600 px-2 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            type="submit"
+          >
+            <FaCheck /> Save changes
+          </button>
+          <button
+            className="flex items-center justify-center gap-2 rounded-lg border border-transparent bg-red-600 px-2 py-2 text-xs font-semibold text-white hover:bg-red-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            onClick={handleClick}
+          >
+            <MdClose /> Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -80,7 +95,10 @@ const TaskCard = ({ task }: { task: Task }) => {
   return (
     <div className="flex flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
       {editMode ? (
-        <TaskCardEditForm task={task} />
+        <TaskCardEditForm
+          task={task}
+          handleClick={() => setEditMode((prevEditMode) => !prevEditMode)}
+        />
       ) : (
         <TaskCardContent task={task} />
       )}
