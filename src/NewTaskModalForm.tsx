@@ -15,7 +15,7 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
     defaultValues: {
       title: "",
       description: "",
-      status: props.status.id,
+      statusId: props.status.id,
     },
   });
   const [createTask] = useCreateTaskMutation();
