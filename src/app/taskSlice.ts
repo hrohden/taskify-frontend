@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { CreateTask } from "../types/Createtask";
 import { Status } from "../types/Status";
 import { Task } from "../types/Task";
 import { UpdateTaskStatus } from "../types/update-task-status";
@@ -43,7 +44,7 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: (_result, _error, arg) => [{ type: "Task", id: arg.id }],
     }),
-    createTask: builder.mutation<Task, Task>({
+    createTask: builder.mutation<Task, CreateTask>({
       query: (task) => ({
         url: "/tasks",
         method: "POST",

@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
 import { useCreateTaskMutation } from "./app/taskSlice";
+import { CreateTask } from "./types/Createtask";
 import { Status } from "./types/Status";
-import { Task } from "./types/Task";
 
 type NewTaskModalFormProps = {
   status: Status;
@@ -11,11 +11,11 @@ type NewTaskModalFormProps = {
 };
 
 const NewTaskModalForm = (props: NewTaskModalFormProps) => {
-  const form = useForm<Task>({
+  const form = useForm<CreateTask>({
     defaultValues: {
       title: "",
       description: "",
-      status: props.status,
+      status: props.status.id,
     },
   });
   const [createTask] = useCreateTaskMutation();
@@ -27,7 +27,6 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
     >
       <form
         onSubmit={form.handleSubmit((data) => {
-          // console.log(data);
           createTask(data);
         })}
         className="grid gap-y-4"
