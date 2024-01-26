@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { FaRocket } from "react-icons/fa";
 import { MdErrorOutline } from "react-icons/md";
 import * as z from "zod";
 import Modal from "./Modal";
@@ -91,7 +92,7 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
           type="submit"
           className="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         >
-          Submit
+          <FaRocket /> Create!
         </button>
       </form>
     </Modal>
