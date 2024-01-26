@@ -32,12 +32,16 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
     <Modal
       title="New task"
       isOpen={props.isModalOpen}
-      onClose={() => props.setIsModalOpen(false)}
+      onClose={() => {
+        props.setIsModalOpen(false);
+        form.reset();
+      }}
     >
       <form
         onSubmit={form.handleSubmit((data) => {
           createTask(data);
           props.setIsModalOpen(false);
+          form.reset();
         })}
         className="grid gap-y-4"
       >
