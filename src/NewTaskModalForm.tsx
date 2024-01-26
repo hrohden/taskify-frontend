@@ -28,6 +28,7 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
       <form
         onSubmit={form.handleSubmit((data) => {
           createTask(data);
+          props.setIsModalOpen(false);
         })}
         className="grid gap-y-4"
       >
