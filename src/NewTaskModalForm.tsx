@@ -1,4 +1,7 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { MdErrorOutline } from "react-icons/md";
+import * as z from "zod";
 import Modal from "./Modal";
 import { useCreateTaskMutation } from "./app/taskSlice";
 import { CreateTask } from "./types/Createtask";
@@ -11,12 +14,18 @@ type NewTaskModalFormProps = {
 };
 
 const NewTaskModalForm = (props: NewTaskModalFormProps) => {
+  const schema = z.object({
+    title: z.string().min(1, { message: "Title is mandatory" }),
+    description: z.string().optional(),
+    statusId: z.number(),
+  });
   const form = useForm<CreateTask>({
     defaultValues: {
       title: "",
       description: "",
       statusId: props.status.id,
     },
+    resolver: zodResolver(schema),
   });
   const [createTask] = useCreateTaskMutation();
   return (
@@ -33,14 +42,33 @@ const NewTaskModalForm = (props: NewTaskModalFormProps) => {
         className="grid gap-y-4"
       >
         <div>
-          <label htmlFor="title" className="mb-2 block text-sm dark:text-white">
+          <label
+            htmlFor="title"
+            className="mb-2 block text-sm font-medium dark:text-white"
+          >
             Title (mandatory)
           </label>
-          <input
-            type="text"
-            {...form.register("title")}
-            className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
-          />
+          <div className="relative">
+            <input
+              type="text"
+              {...form.register("title")}
+              className={
+                form.formState.errors.title?.message
+                  ? "block w-full rounded-lg border border-red-500 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                  : "block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+              }
+            />
+            {form.formState.errors.title?.message && (
+              <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center pe-3 text-red-600">
+                <MdErrorOutline />
+              </div>
+            )}
+          </div>
+          {form.formState.errors.title?.message && (
+            <p className="mt-2 text-sm text-red-600">
+              {form.formState.errors.title?.message}
+            </p>
+          )}
         </div>
         <div>
           <label
